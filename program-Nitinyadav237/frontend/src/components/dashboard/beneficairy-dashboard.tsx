@@ -53,9 +53,12 @@ const theme = {
     base: "text-center p-4 bg-gray-300 dark:bg-gray-900/50 rounded-lg",
   },
 };
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  children: React.ReactNode;
+};
 
-// @ts-ignore
-const Button = ({ children, ...props }) => (
+const Button: React.FC<ButtonProps> = ({ children, ...props }) => (
+
   <button
     {...props}
     className={`${theme.button.base} ${theme.button.hover}`}
@@ -63,24 +66,32 @@ const Button = ({ children, ...props }) => (
     {children}
   </button>
 )
+type StatCardProps = {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  title: string;
+  value: string | number;
+  status?: keyof typeof theme.statusColors; // 👈 added status prop, optional
+};
 
 // ✅ Status Card
-// @ts-ignore
-const StatusCard = ({ icon: Icon, title, value, status }) => (
+const StatusCard = ({ icon: Icon, title, value, status }: StatCardProps) => (
   <div className={`group ${theme.card.base} ${theme.card.hover}`}>
-    <div className={`${theme.iconContainer.base} mb-4 ${theme.iconContainer.hover}`}>
-      {/* @ts-ignore */}
-      <Icon className={`w-6 h-6 ${theme.statusColors[status] || theme.statusColors.default}`}
+    <div
+      className={`${theme.iconContainer.base} mb-4 ${theme.iconContainer.hover}`}
+    >
+      <Icon
+        className={`w-6 h-6 ${
+          status ? theme.statusColors[status] : theme.statusColors.default
+        }`}
       />
     </div>
-    <p className={`${theme.typography.subtext} font-medium mb-2`}>
-      {title}
-    </p>
+    <p className={`${theme.typography.subtext} font-medium mb-2`}>{title}</p>
     <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
       {value}
     </p>
   </div>
-)
+);
+
 
 export default function BeneficiaryDashboard() {
   return (

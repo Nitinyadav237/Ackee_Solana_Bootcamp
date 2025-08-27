@@ -3,11 +3,9 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
-interface CreateCycleFormProps {
-  onClose: () => void
-}
 
-export default function CreateCycleForm({ onClose }: CreateCycleFormProps) {
+
+export default function CreateCycleForm() {
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     collateral_amount: "",

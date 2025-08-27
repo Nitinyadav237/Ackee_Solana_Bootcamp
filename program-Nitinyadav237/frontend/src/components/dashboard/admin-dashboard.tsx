@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { Users, Vault, Settings, CheckCircle, RefreshCw, X, DollarSign, Plus } from 'lucide-react';
+import { Users, Vault, Settings, CheckCircle, RefreshCw, X,  Plus, } from 'lucide-react';
 
 // Central theme
 const theme = {
@@ -82,18 +82,23 @@ const AdminDashboard = () => {
     }
   };
 
-  // @ts-ignore
-  const StatCard = ({ icon: Icon, title, value, className = "" }) => (
-    <div className={`group ${theme.card.base} ${theme.card.hover} ${className}`}>
-      <div className={`${theme.iconContainer.base} mb-4 ${theme.iconContainer.hover}`}>
-        <Icon className={`w-6 h-6 ${theme.statusColors.position}`} />
-      </div>
-      <div className="min-w-0 flex-1">
-        <p className={`${theme.typography.subtext} font-medium mb-2`}>{title}</p>
-        <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{value}</p>
-      </div>
+  type StatCardProps = {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  title: string;
+  value: string | number;
+  className?: string;
+};
+const StatCard = ({ icon: Icon, title, value, className = "" }: StatCardProps) => (
+  <div className={`group ${theme.card.base} ${theme.card.hover} ${className}`}>
+    <div className={`${theme.iconContainer.base} mb-4 ${theme.iconContainer.hover}`}>
+      <Icon className={`w-6 h-6 ${theme.statusColors.position}`} />
     </div>
-  );
+    <div className="min-w-0 flex-1">
+      <p className={`${theme.typography.subtext} font-medium mb-2`}>{title}</p>
+      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{value}</p>
+    </div>
+  </div>
+);
 
   const emptySlots = Array.from({ length: Math.max(0, 10 - beneficiaries.length) }, (_, i) => ({
     id: beneficiaries.length + i + 1,

@@ -50,7 +50,7 @@ export default function CreateCycleModal({
 
         {/* Conditional render */}
         {showForm ? (
-          <CreateCycleForm onClose={handleClose}  />
+          <CreateCycleForm   />
         ) : (
           <div className="flex flex-col items-center text-center space-y-4 sm:space-y-6">
             {/* Icon */}
